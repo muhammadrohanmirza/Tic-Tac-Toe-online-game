@@ -17,25 +17,27 @@ export default function SocketTestPage() {
       setLogs((prev) => [...prev.slice(-9), `[${new Date().toLocaleTimeString()}] ${msg}`]);
     };
 
-    sock.on("connect", () => {
-      addLog("✅ Connected!");
-      setConnected(true);
-    });
+    if (sock) {
+      sock.on("connect", () => {
+        addLog("✅ Connected!");
+        setConnected(true);
+      });
 
-    sock.on("disconnect", () => {
-      addLog("❌ Disconnected");
-      setConnected(false);
-    });
+      sock.on("disconnect", () => {
+        addLog("❌ Disconnected");
+        setConnected(false);
+      });
 
-    sock.on("connect_error", (err) => {
-      addLog(`❌ Error: ${err.message}`);
-    });
+      sock.on("connect_error", (err) => {
+        addLog(`❌ Error: ${err.message}`);
+      });
 
-    sock.on("connect_timeout", () => {
-      addLog("⏰ Timeout");
-    });
+      sock.on("connect_timeout", () => {
+        addLog("⏰ Timeout");
+      });
 
-    addLog("Connecting...");
+      addLog("Connecting...");
+    }
 
     return () => {
       addLog("Cleanup");
