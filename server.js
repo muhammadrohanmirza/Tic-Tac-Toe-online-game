@@ -37,9 +37,7 @@ app.prepare().then(() => {
 
   const io = new Server(httpServer, {
     cors: {
-      origin: process.env.ALLOWED_ORIGINS 
-        ? process.env.ALLOWED_ORIGINS.split(',') 
-        : ['http://localhost:3000', 'https://tic-tac-toe-online-game-07.vercel.app'],
+      origin: ['http://localhost:3000', 'https://tic-tac-toe-7.up.railway.app'],
       methods: ['GET', 'POST'],
       credentials: true
     },

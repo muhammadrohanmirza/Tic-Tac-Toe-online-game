@@ -25,7 +25,7 @@ export function useSocket() {
     const socketUrl =
       process.env.NEXT_PUBLIC_SOCKET_URL ||
       process.env.NEXT_PUBLIC_URL ||
-      "https://tic-tac-toe-online-game-07.vercel.app";
+      "https://tic-tac-toe-7.up.railway.app";
 
     const newSocket = io(socketUrl, {
       path: "/api/socket",
