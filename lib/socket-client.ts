@@ -7,7 +7,10 @@ let socket: Socket | null = null
 export const getSocket = (): Socket | null => {
   if (!socket) {
     // Use environment variable for production, localhost for development
-    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3000'
+    const socketUrl =
+      process.env.NEXT_PUBLIC_SOCKET_URL ||
+      process.env.NEXT_PUBLIC_URL ||
+      "https://tic-tac-toe-online-game-07.vercel.app";
     
     socket = io(socketUrl, {
       transports: ['websocket', 'polling'],
