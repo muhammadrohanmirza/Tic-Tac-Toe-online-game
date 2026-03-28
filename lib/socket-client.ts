@@ -4,13 +4,17 @@ import { io, Socket } from 'socket.io-client'
 
 let socket: Socket | null = null
 
-export const getSocket = (): Socket => {
+export const getSocket = (): Socket | null => {
   if (!socket) {
-    socket = io('http://localhost:3000', {
+    // Use environment variable for production, localhost for development
+    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3000'
+    
+    socket = io(socketUrl, {
       transports: ['websocket', 'polling'],
       reconnection: true,
       reconnectionAttempts: 10,
       reconnectionDelay: 1000,
+      autoConnect: true,
     })
 
     socket.on('connect', () => {
